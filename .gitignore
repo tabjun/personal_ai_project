@@ -10,7 +10,11 @@ env/
 *.ini
 *.key
 *.db*
-*.md
+.pdf
+.hwp
+.docs
+.xls*
+
 # 파이썬 캐시 무시
 __pycache__/
 *.pyc
@@ -24,3 +28,12 @@ wheels/
 # VS Code 설정 무시
 .vscode/
 resume.pdf
+
+#  [개인정보 보호] 
+result/
+knowledge/
+more_info/
+
+!resume_example.md
+!resume_example.txt
+!guideline.txt
