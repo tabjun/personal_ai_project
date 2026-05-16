@@ -27,15 +27,22 @@ resume.pdf
 
 #  [개인정보 보호] 
 result/
-# 2. more_info 폴더 내부는 전부 무시하되 특정 파일만 예외
+
+# 프로젝트별 간섭없게 상위 설정
+
+# [job_hunter 관련]
+resum/self_introduction
+# more_info 폴더 내부는 전부 무시하되 특정 파일만 예외
 resum/more_info/*
 !resum/more_info/guideline.txt
 
 # 3. knowledge 폴더 내부는 전부 무시하되 특정 파일만 예외
 resum/self_introduction/*
+# knowledge 폴더 내부는 전부 무시하되 특정 파일만 예외
 resum/knowledge/*
 !resum/knowledge/resume_example.md
 !resum/knowledge/resume_example.txt
+
 
 *.pdf
 *.hwp
