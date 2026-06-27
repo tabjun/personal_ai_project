@@ -1,6 +1,2 @@
-[mcp_servers.caveman-shrink]
-command = "npx"
-args = [
-    "-y",
-    "caveman-shrink",
-]
+# No project-level MCP servers.
+# caveman-shrink was removed because it failed MCP handshake during Codex startup.
