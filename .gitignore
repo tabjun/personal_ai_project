@@ -27,6 +27,7 @@ wheels/
 !quantitative_trading/.vscode/
 !quantitative_trading/.vscode/settings.json
 !quantitative_trading/.vscode/extensions.json
+.codex/
 resume.pdf
 
 #  [개인정보 보호] 
