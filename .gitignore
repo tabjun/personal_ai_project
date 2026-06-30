@@ -23,6 +23,10 @@ wheels/
 
 # VS Code 설정 무시
 .vscode/
+**/.vscode/*
+!quantitative_trading/.vscode/
+!quantitative_trading/.vscode/settings.json
+!quantitative_trading/.vscode/extensions.json
 resume.pdf
 
 #  [개인정보 보호] 
