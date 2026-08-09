@@ -23,7 +23,16 @@ wheels/
 
 # VS Code 설정 무시
 .vscode/
+**/.vscode/*
+!quantitative_trading/.vscode/
+!quantitative_trading/.vscode/settings.json
+!quantitative_trading/.vscode/extensions.json
+.codex/
 resume.pdf
+
+# 에이전트 설정 및 로컬 스킬 제외 (Codex/Claude 스킬 다운로드 폴더)
+.agents/
+**/.agents/
 
 #  [개인정보 보호] 
 result/
