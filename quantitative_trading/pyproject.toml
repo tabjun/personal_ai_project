@@ -1,0 +1,32 @@
+[project]
+name = "stock"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "python-dotenv",
+    "openai",
+    "google-generativeai",
+    "ipykernel==6.29.5",
+    "jupyter-client==8.6.3",
+    "traitlets==5.14.3",
+    "pyzmq==26.2.1",
+    "ipywidgets==8.1.8",
+    "jupyterlab-widgets",
+    "numpy",
+    "matplotlib",
+    "fastdtw",
+    "scipy",
+    "duckdb",
+    "pandas",
+    "torch",
+    "optuna",
+    "statsmodels",
+    "pyupbit",
+    "scikit-learn",
+    "tabulate",
+    "scrapling",
+    "dtaidistance>=2.4.0",
+]
+
