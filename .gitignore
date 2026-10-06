@@ -23,16 +23,14 @@ wheels/
 
 # VS Code 설정 무시
 .vscode/
-**/.vscode/*
-!quantitative_trading/.vscode/
-!quantitative_trading/.vscode/settings.json
-!quantitative_trading/.vscode/extensions.json
-.codex/
 resume.pdf
 
-# 에이전트 설정 및 로컬 스킬 제외 (Codex/Claude 스킬 다운로드 폴더)
+# 별도 프로젝트 폴더 무시
+quantitative_trading/
+
+# 에이전트 설정 및 로컬 스킬 제외
 .agents/
-**/.agents/
+.codex/
 **/.claude/settings.local.json
 
 # AI 에이전트 작업 문서: 서버 ↔ 로컬 클로드/코덱스가 동일 지침/이력을 공유하도록 추적한다.
@@ -46,25 +44,19 @@ resume.pdf
 
 #  [개인정보 보호] 
 result/
-
-# 프로젝트별 간섭없게 상위 설정
-
-# [job_hunter 관련]
-resum/self_introduction
-# more_info 폴더 내부는 전부 무시하되 특정 파일만 예외
+# 2. more_info 폴더 내부는 전부 무시하되 특정 파일만 예외
 resum/more_info/*
 !resum/more_info/guideline.txt
 
 # 3. knowledge 폴더 내부는 전부 무시하되 특정 파일만 예외
 resum/self_introduction/*
-# knowledge 폴더 내부는 전부 무시하되 특정 파일만 예외
 resum/knowledge/*
 !resum/knowledge/resume_example.md
 !resum/knowledge/resume_example.txt
-
 
 *.pdf
 *.hwp
 *.docs
 *.xls*
 *.jpeg
+*.png
