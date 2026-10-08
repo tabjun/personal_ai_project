@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "stock": {"directory": "stock", "aliases": ["quantitative_trading"], "branches": ["stock"], "prefixes": ["feature/stock/"]},
+    "apple": {"directory": "apple", "branches": ["apple"], "prefixes": ["feature/apple/"]},
+    "resume": {"directory": "resum", "branches": ["job_agent"], "prefixes": []}
+  },
+  "governance_files": ["AGENTS.md", "stock/AGENTS.md", "apple/AGENTS.md", "resum/AGENTS.md"],
+  "governance_directories": ["tools/isolation", ".githooks"]
+}
