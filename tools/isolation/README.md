@@ -40,15 +40,16 @@ On a clean checkout, stock uses `git switch stock`, then
 `git switch apple` and `git pull --ff-only origin apple`. Review/stage only
 quantitative_trading (or legacy stock) on stock, and only apple on apple.
 Push the corresponding branch explicitly. Never use root-wide `git add .`.
-The checker must still be available in the original root when switching older
-branches. Local hooks do not automatically enforce rules on the server.
+The installed checker survives switching older branches. Use
+`git hook run pre-commit` when that branch lacks the tracked checker files.
+Local hooks do not automatically enforce rules on the server.
 
 ## Commit Guard
 
 Requires Python 3.10+. Same commands work in PowerShell and Linux:
 
 ```sh
-git config core.hooksPath "<absolute-original-repository-path>/.githooks"
+python tools/isolation/install.py
 python tools/isolation/check.py
 python -m unittest discover -s tools/isolation -p "test_*.py" -v
 ```
@@ -57,14 +58,17 @@ The hook checks staged paths, including both sides of renames. Unknown branches,
 detached HEAD and normal commits on develop/main are blocked. Stage explicit
 project paths, not `git add .` at the root. Root-wide changes must be separate.
 Hooks are local safeguards, not a security boundary: `--no-verify` bypasses them.
-This local setup uses an absolute shared hooks directory in the original
-repository, so older project branches without `tools/isolation` still run the
-guard. Git LFS lifecycle hooks remain installed there. On stock branches, the
+The installer copies the guard and policy into the shared Git directory's
+`project-isolation/` and configures an absolute hooksPath. Branch switches can
+remove the tracked rule files without removing the installed guard. Rerun the
+installer after updating rules. Existing unrelated hooks must be reviewed before
+installation; these five managed hooks are replaced on reinstallation.
+Git LFS lifecycle hooks remain installed there. On stock branches, the
 existing `quantitative_trading/.githooks/pre-commit` notebook mirror and research
 checks also run, followed by another ownership check on generated staged files.
 Apple's previously inactive policy script is left inactive; the common ownership
 guard does apply to apple. Remote/server clones need their own installation.
-These local configuration changes do not install remote CI or publish rules.
+Each clone must run the installer separately; this does not install remote CI.
 
 For this explicitly requested governance setup, isolate the rule files in their
 own commit; do not stage the existing resume implementation changes with them:

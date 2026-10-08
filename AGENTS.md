@@ -47,9 +47,9 @@ project paths. Never use root-wide `git add .` for a project commit. Push the
 intended project branch explicitly (`git push origin job_agent`, `stock`, or
 `apple`); commits/pushes do not create independent per-folder branches.
 
-This local repository uses an absolute shared hooksPath pointing at this
-checkout's `.githooks`; the hook locates its checker beside itself, even when
-older project branches do not contain the new rules. Keep that folder in place.
+Install with `python tools/isolation/install.py`. This local repository uses an
+absolute hooksPath inside the shared Git directory's `project-isolation/`, so
+the installed policy survives branch switches. Reinstall after policy updates.
 Other machines/clones must install their own hooks; this is not remote CI.
 For portable enforcement these files must exist in each checkout. Apply
 only an explicitly reviewed governance commit to other branches; never merge

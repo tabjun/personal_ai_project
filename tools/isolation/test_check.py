@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -158,6 +159,37 @@ class IsolationTests(unittest.TestCase):
             with self.assertRaises(subprocess.CalledProcessError) as failure:
                 git(linked, "commit", "-m", "blocked generated foreign project")
             self.assertIn(b"resum/generated.txt", failure.exception.output)
+
+    def test_installer_survives_removal_of_checkout_rules(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            def git(*args):
+                return subprocess.check_output(["git", *args], cwd=root, stderr=subprocess.STDOUT)
+            git("init", "-b", "job_agent")
+            git("config", "user.name", "Fixture")
+            git("config", "user.email", "fixture@example.invalid")
+            git("config", "commit.gpgsign", "false")
+            (root / "resum").mkdir()
+            (root / "resum/file.txt").write_text("initial", encoding="utf-8")
+            git("add", ".")
+            git("commit", "-m", "fixture")
+            policy = root / "tools/isolation"
+            policy.mkdir(parents=True)
+            for name in ("install.py", "check.py", "projects.json"):
+                shutil.copy2(HERE / name, policy / name)
+            hooks = root / ".githooks"
+            hooks.mkdir()
+            for name in ("pre-commit", "post-checkout", "post-commit", "post-merge", "pre-push"):
+                shutil.copy2(HERE.parent.parent / ".githooks" / name, hooks / name)
+            subprocess.run([sys.executable, str(policy / "install.py")], cwd=root, check=True, capture_output=True)
+            shutil.rmtree(root / "tools")
+            shutil.rmtree(hooks)
+            self.assertEqual(git("hook", "run", "pre-commit").strip(), b"OK: resume, 0 changed paths")
+            (root / "apple").mkdir()
+            (root / "apple/file.txt").write_text("foreign", encoding="utf-8")
+            git("add", "apple")
+            with self.assertRaises(subprocess.CalledProcessError):
+                git("hook", "run", "pre-commit")
 
 
 if __name__ == "__main__":
